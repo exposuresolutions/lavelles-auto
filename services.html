@@ -358,6 +358,35 @@
         .btn-call { background: var(--primary); color: var(--white); }
         .btn-whatsapp { background: #25D366; color: var(--white); }
 
+        /* Social Icons (Right Side) */
+        .social-icons {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1100; /* Increased to sit above header */
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--white);
+            border-radius: 50%;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            text-decoration: none;
+            font-size: 1.5rem;
+        }
+        .social-icon:hover {
+            transform: scale(1.15);
+            box-shadow: var(--shadow-lg);
+        }
+
         @media (max-width: 768px) {
             .mobile-action-bar { display: flex; }
             .footer { padding-bottom: 80px; } /* Space for bar */
