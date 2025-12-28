@@ -95,6 +95,16 @@
             transform: scale(1.05);
         }
 
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
         /* Header */
         .header {
             position: fixed;
@@ -134,13 +144,38 @@
         .nav-link {
             font-family: var(--font-display);
             font-size: 0.95rem;
-            color: var,--white);
+            color: var(--white);
             text-decoration: none;
             transition: var(--transition);
         }
         .nav-link:hover { color: var(--accent); }
 
-        .nav-toggle { display: none; }
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+        
+        .hamburger {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: var(--white);
+            position: relative;
+            transition: var(--transition);
+        }
+        .hamburger::before, .hamburger::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            transition: var(--transition);
+        }
+        .hamburger::before { top: -8px; }
+        .hamburger::after { top: 8px; }
 
         /* Page Hero */
         .page-hero {
@@ -320,19 +355,25 @@
                 background: rgba(0,0,0,0.98);
                 flex-direction: column;
                 justify-content: center;
+                align-items: center;
                 transition: var(--transition);
                 padding: 20px;
                 z-index: 1000;
             }
             .nav-menu.active { left: 0; }
-            .nav-link { font-size: 1.5rem; margin: 15px 0; }
+            .nav-menu li { list-style: none; margin: 10px 0; }
+            .nav-link { font-size: 1.5rem; margin: 15px 0; display: block; color: var(--white); }
             
             /* Resize logo for mobile */
             .logo-img { width: 140px; height: 140px; }
+            .nav-logo img { width: 140px; height: 140px; }
             .header { padding: 0.5rem 0; }
             
             .partner-card { grid-template-columns: 1fr; }
             .partner-image { min-height: 250px; }
+            
+            /* Hide social icons on mobile */
+            .social-icons { display: none; }
         }
     </style>
 </head>
