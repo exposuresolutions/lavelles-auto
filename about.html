@@ -190,6 +190,44 @@
             color: rgba(255,255,255,0.8);
         }
 
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand {
+            grid-column: span 2;
+            text-align: center;
+        }
+
+        .footer-brand h4 {
+            margin: 10px 0;
+            color: var(--accent);
+        }
+
+        .footer-brand p {
+            margin-bottom: 10px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .footer-social a {
+            color: var(--white);
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+        .footer-social a:hover {
+            transform: translateY(-2px);
+        }
+
         .footer-bottom {
             text-align: center;
             padding-top: 30px;
@@ -197,36 +235,6 @@
             font-size: 0.9rem;
             color: rgba(255,255,255,0.5);
         }
-
-        /* Sticky Mobile Action Bar */
-        .mobile-action-bar {
-            display: none;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: var(--white);
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-            z-index: 1000;
-            padding: 10px;
-            justify-content: space-around;
-            gap: 10px;
-        }
-        .mobile-action-btn {
-            flex: 1;
-            padding: 12px;
-            border-radius: var(--radius);
-            text-align: center;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        .btn-call { background: var(--primary); color: var(--white); }
-        .btn-whatsapp { background: #25D366; color: var(--white); }
 
         @media (max-width: 768px) {
             .mobile-action-bar { display: flex; }
@@ -330,12 +338,12 @@
                     <img src="https://storage.googleapis.com/msgsndr/KbiucErIMNPbO1mY4qXL/media/693c3256078883f5afa88cff.png" alt="Lavelle's Auto Logo">
                 </a>
                 <ul class="nav-menu" id="nav-menu">
-                    <li><a href="index-v2.html#services" class="nav-link">Services</a></li>
-                    <li><a href="booking.html" class="nav-link">Book Now</a></li>
-                    <li><a href="loyalty.html" class="nav-link">Loyalty</a></li>
-                    <li><a href="parts.html" class="nav-link">Parts & Shop</a></li>
-                    <li><a href="partners.html" class="nav-link">Partners</a></li>
-                    <li><div id="google_translate_element"></div></li>
+                    <li><a href="/" class="nav-link">Home</a></li>
+                    <li><a href="/services" class="nav-link">Services</a></li>
+                    <li><a href="/booking" class="nav-link">Book Now</a></li>
+                    <li><a href="/loyalty" class="nav-link">Loyalty</a></li>
+                    <li><a href="/parts" class="nav-link">Parts & Shop</a></li>
+                    <li><a href="/partners" class="nav-link">Partners</a></li>
                     <li><a href="tel:0871234567" class="btn btn-accent">📞 Call Now</a></li>
                 </ul>
                 <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
@@ -386,9 +394,62 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="https://storage.googleapis.com/msgsndr/KbiucErIMNPbO1mY4qXL/media/693c3256078883f5afa88cff.png" alt="Lavelle's Auto Logo">
+                    <h4>LAVELLE'S AUTO</h4>
+                    <p>The future of car repairs on Achill Island. Honest, reliable, and skilled service for over 50 years.</p>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/lavellesauto" target="_blank">📘</a>
+                        <a href="https://www.instagram.com/lavellesauto" target="_blank">📷</a>
+                        <a href="https://wa.me/353871234567" target="_blank">💬</a>
+                        <a href="https://g.page/lavellesauto" target="_blank">🗺️</a>
+                    </div>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/services">All Services</a></li>
+                        <li><a href="/booking">Book Appointment</a></li>
+                        <li><a href="/loyalty">Loyalty Program</a></li>
+                        <li><a href="/parts">Order Parts</a></li>
+                        <li><a href="/partners">Partner Services</a></li>
+                        <li><a href="/payments" style="color: var(--accent);">Make a Payment</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Connect</h4>
+                    <ul style="display: flex; flex-wrap: wrap; gap: 10px; list-style: none; padding: 0;">
+                        <li><a href="#" title="TikTok">🎵 TikTok</a></li>
+                        <li><a href="#" title="Snapchat">👻 Snapchat</a></li>
+                        <li><a href="#" title="Telegram">✈️ Telegram</a></li>
+                        <li><a href="#" title="Reddit">🤖 Reddit</a></li>
+                        <li><a href="#" title="Facebook Marketplace">🏪 FB Market</a></li>
+                        <li><a href="#" title="Google Maps">📍 Maps</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>📍 Achill Sound, Co. Mayo</li>
+                        <li>📞 <a href="tel:0871234567">087-123-4567</a></li>
+                        <li>📧 <a href="mailto:info@lavellesauto.ie">info@lavellesauto.ie</a></li>
+                        <li>💬 <a href="https://wa.me/353871234567">WhatsApp Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Hours</h4>
+                    <ul>
+                        <li>Mon-Fri: 6pm - 9pm</li>
+                        <li>Saturday: 9am - 2pm</li>
+                        <li>Sunday: Closed</li>
+                        <li style="margin-top: 10px; color: var(--accent);">🚨 Emergency call-outs 24/7</li>
+                    </ul>
+                </div>
+            </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 Lavelle's Auto Diagnostics & Repair. All Rights Reserved.</p>
-                <p style="margin-top: 10px;">Website by <a href="https://exposuresolutions.ie" target="_blank">Exposure Solutions</a></p>
+                <p style="margin-top: 10px;">Website by <a href="https://exposuresolutions.ie" target="_blank" style="color: var(--accent);">Exposure Solutions</a></p>
                 <div style="margin-top: 20px;">
                     <img src="https://storage.googleapis.com/msgsndr/KbiucErIMNPbO1mY4qXL/media/693c816ccfdc2fd8de5e712c.jpeg" alt="Powered by Exposure Solutions AI" style="max-width: 150px; height: auto; display: inline-block; opacity: 0.8;">
                 </div>
