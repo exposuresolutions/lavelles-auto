@@ -278,7 +278,6 @@
             /* Mobile Navigation Fix */
             .nav-toggle { display: block; z-index: 1001; }
             .nav-menu {
-                display: flex; /* Override display: none if set elsewhere */
                 position: fixed;
                 top: 0;
                 left: -100%;
@@ -289,7 +288,6 @@
                 justify-content: center;
                 transition: var(--transition);
                 padding: 20px;
-                z-index: 1000;
             }
             .nav-menu.active { left: 0; }
             .nav-link { font-size: 1.5rem; margin: 15px 0; }
