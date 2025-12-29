@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help Shape Lavelle's Auto | Your Feedback Matters</title>
+    <meta name="description" content="Vote on the final name, domain, and services for Ethan's new garage. Your opinion counts!">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #005A9C;
+            --primary-dark: #003D6B;
+            --secondary: #D40000;
+            --accent: #FDB813;
+            --dark: #1a1a1a;
+            --light: #f4f4f4;
+            --white: #ffffff;
+            --gray: #666;
+            --green: #28a745;
+            --radius: 8px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Roboto', sans-serif; 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        h1,h2,h3 { font-family: 'Roboto Condensed', sans-serif; }
+        
+        .container { max-width: 800px; margin: 0 auto; }
+        
+        /* Header Card */
+        .header-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        .logo { width: 120px; margin: 0 auto 20px; }
+        .header-card h1 { color: var(--primary); font-size: 2rem; margin-bottom: 10px; }
+        .header-card p { color: var(--gray); font-size: 1.1rem; }
+        .badge { display: inline-block; background: var(--accent); color: var(--dark); padding: 8px 20px; border-radius: 30px; font-weight: bold; margin-top: 15px; }
+        
+        /* Survey Card */
+        .survey-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .survey-card h2 { color: var(--primary); font-size: 1.4rem; margin-bottom: 20px; border-bottom: 3px solid var(--accent); padding-bottom: 10px; display: inline-block; }
+        .survey-card p { color: var(--gray); margin-bottom: 20px; }
+        
+        /* Options */
+        .options { display: grid; gap: 15px; }
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border: 2px solid #eee;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .option:hover { border-color: var(--primary); background: #f8f9ff; }
+        .option.selected { border-color: var(--green); background: #e8f5e9; }
+        .option input { display: none; }
+        .option-check {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #ccc;
+            border-radius: 50%;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .option.selected .option-check { background: var(--green); border-color: var(--green); color: white; }
+        .option-content { flex: 1; }
+        .option-content h4 { color: var(--dark); margin-bottom: 5px; }
+        .option-content p { color: var(--gray); font-size: 0.9rem; margin: 0; }
+        
+        /* Text Areas */
+        textarea, input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #eee;
+            border-radius: var(--radius);
+            font-family: inherit;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            transition: border-color 0.3s;
+        }
+        textarea:focus, input:focus { outline: none; border-color: var(--primary); }
+        textarea { min-height: 100px; resize: vertical; }
+        
+        /* Rating */
+        .rating { display: flex; gap: 10px; margin-bottom: 20px; }
+        .rating-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #eee;
+            border-radius: var(--radius);
+            background: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .rating-btn:hover { border-color: var(--primary); }
+        .rating-btn.selected { background: var(--primary); color: white; border-color: var(--primary); }
+        
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--accent);
+            color: var(--dark);
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Roboto Condensed', sans-serif;
+            text-transform: uppercase;
+        }
+        .submit-btn:hover { background: #e6a500; transform: translateY(-2px); }
+        
+        /* Footer */
+        .footer { text-align: center; color: rgba(255,255,255,0.7); padding: 30px; font-size: 0.9rem; }
+        .footer a { color: var(--accent); }
+        
+        /* Share Section */
+        .share-section { 
+            background: linear-gradient(135deg, var(--accent) 0%, #e6a500 100%); 
+            color: var(--dark); 
+            padding: 25px; 
+            border-radius: var(--radius); 
+            text-align: center; 
+            margin-top: 30px; 
+        }
+        .share-section h3 { margin-bottom: 15px; }
+        .share-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+        .share-btn {
+            padding: 12px 20px;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-weight: bold;
+            color: white;
+            transition: transform 0.3s;
+        }
+        .share-btn:hover { transform: scale(1.05); }
+        .share-wa { background: #25D366; }
+        .share-fb { background: #1877F2; }
+        .share-tw { background: #1DA1F2; }
+        .share-email { background: var(--gray); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header-card">
+            <img src="https://storage.googleapis.com/msgsndr/KbiucErIMNPbO1mY4qXL/media/693c3256078883f5afa88cff.png" alt="Lavelle's Auto Logo" class="logo">
+            <h1>Help Shape the Future of Lavelle's Auto</h1>
+            <p>Ethan is launching his new garage on Achill Island and wants YOUR input on the final name, branding, and services.</p>
+            <div class="badge">?? Complete for a chance to win a FREE oil change!</div>
+        </div>
+
+        <form id="surveyForm" onsubmit="submitSurvey(event)">
+            <!-- Q1: Business Name -->
+            <div class="survey-card">
+                <h2>1. What Name Do You Prefer?</h2>
+                <p>We're deciding between these options. Which sounds best for a trusted mechanic on Achill?</p>
+                <div class="options" id="name-options">
+                    <label class="option" onclick="selectOption(this, 'name')">
+                        <input type="radio" name="business_name" value="Lavelle's Auto">
+                        <div class="option-check">?</div>
+                        <div class="option-content">
+                            <h4>Lavelle's Auto</h4>
+                            <p>Clean, professional, family heritage focus</p>
+                        </div>
+                    </label>
+                    <label class="option" onclick="selectOption(this, 'name')">
+                        <input type="radio" name="business_name" value="Lavelle's Auto Diagnostics & Repair">
+                        <div class="option-check">?</div>
+                        <div class="option-content">
+                            <h4>Lavelle's Auto Diagnostics & Repair</h4>
+                            <p>Highlights the diagnostic expertise</p>
+                        </div>
+                    </label>
+                    <label class="option" onclick="selectOption(this, 'name')">
+                        <input type="radio" name="business_name" value="Ethan Lavelle Mechanics">
+                        <div class="option-check">?</div>
+                        <div class="option-content">
+                            <h4>Ethan Lavelle Mechanics</h4>
+                            <p>Personal touch, puts Ethan's name front and center</p>
+                        </div>
+                    </label>
+                    <label class="option" onclick="selectOption(this, 'name')">
+                        <input type="radio" name="business_name" value="Achill Auto Care">
+                        <div class="option-check">?</div>
+                        <div class="option-content">
+                            <h4>Achill Auto Care</h4>
+                            <p>Location-focused, community feel</p>
+                        </div>
+                    </label>
+                </div>
+                <div style="margin-top: 15px;">
+                    <input type="text" name="name_other" placeholder="Or suggest your own name idea...">
+                </div>
+            </div>
+
+            <!-- Q2: Domain -->
+            <div class="survey-card">
+                <h2>2. Which Domain (Web Address)?</h2>
+                <p>This will be the website address customers visit.</p>
+                <div class="options" id="domain-options">
+                    <label class="option" onclick="selectOption(this, 'domain')">
+                        <input type="radio" name="domain" value="lavellesauto.ie">
+                        <div class="option-check">?</div>
+                        <div class="option-content">
+                            <h4>lavellesauto.ie</h4>
+                            <p>Irish domain, professional, easy to remember</p>
+                        </div>
+                    </label>
+                    <label class="option" onclick="selectOption(this, 'domain')">
+                        <input type="radio" name="domain" value="lavellesauto.com">
+                        <div class="option-check">?</div>
+                        <div class="option-content">
+                            <h4>lavellesauto.com</h4>
+                            <p>International, universal recognition</p>
+                        </div>
+                    </label>
+                    <label class="option" onclick="selectOption(this, 'domain')">
+                        <input type="radio" name="domain" value="achillauto.ie">
+                        <div class="option-check">?</div>
+                        <div class="option-content">
+                            <h4>achillauto.ie</h4>
+                            <p>Location-focused, great for local SEO</p>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Q3: Website Rating -->
+            <div class="survey-card">
+                <h2>3. Rate the Website Design</h2>
+                <p>How would you rate the look and feel of the website? (1 = Poor, 10 = Excellent)</p>
+                <div class="rating" id="design-rating">
+                    <button type="button" class="rating-btn" onclick="selectRating(this, 'design')">1</button>
+                    <button type="button" class="rating-btn" onclick="selectRating(this, 'design')">2</button>
+                    <button type="button" class="rating-btn" onclick="selectRating(this, 'design')">3</button>
+                    <button type="button" class="rating-btn" onclick="selectRating(this, 'design')">4</button>
+                    <button type="button" class="rating-btn" onclick="selectRating(this, 'design')">5</button>
+                    <button type="button" class="rating-btn" onclick="selectRating(this, 'design')">6</button>
+                    <button type="button" class="rating-btn" onclick="selectRating(this, 'design')">7</button>
+                    <button type="button" class="rating-btn" onclick="selectRating(this, 'design')">8</button>
+                    <button type="button" class="rating-btn" onclick="selectRating(this, 'design')">9</button>
+                    <button type="button" class="rating-btn" onclick="selectRating(this, 'design')">10</button>
+                </div>
+                <input type="hidden" name="design_rating" id="design_rating_input">
+            </div>
+
+            <!-- Q4: Favorite Feature -->
+            <div class="survey-card">
+                <h2>4. What Do You Like Most?</h2>
+                <p>Select all that appeal to you.</p>
+                <div class="options" id="features-options">
+                    <label class="option" onclick="toggleMulti(this)">
+                        <input type="checkbox" name="features" value="online_booking">
+                        <div class="option-check">?</div>
+                        <div class="option-content">
+                            <h4>?? Online Booking</h4>
+                            <p>Book appointments 24/7 without calling</p>
+                        </div>
+                    </label>
+                    <label class="option" onclick="toggleMulti(this)">
+                        <input type="checkbox" name="features" value="loyalty_program">
+                        <div class="option-check">?</div>
+                        <div class="option-content">
+                            <h4>?? Loyalty Points Program</h4>
+                            <p>Earn points for services, referrals, and reviews</p>
+                        </div>
+                    </label>
+                    <label class="option" onclick="toggleMulti(this)">
+                        <input type="checkbox" name="features" value="parts_shop">
+                        <div class="option-check">?</div>
+                        <div class="option-content">
+                            <h4>?? Parts & Accessories Shop</h4>
+                            <p>Order dash cams, CarPlay units, etc.</p>
+                        </div>
+                    </label>
+                    <label class="option" onclick="toggleMulti(this)">
+                        <input type="checkbox" name="features" value="whatsapp_booking">
+                        <div class="option-check">?</div>
+                        <div class="option-content">
+                            <h4>?? WhatsApp Booking</h4>
+                            <p>Message directly to book or ask questions</p>
+                        </div>
+                    </label>
+                    <label class="option" onclick="toggleMulti(this)">
+                        <input type="checkbox" name="features" value="partner_services">
+                        <div class="option-check">?</div>
+                        <div class="option-content">
+                            <h4>?? Partner Network</h4>
+                            <p>Access to welding, tyres, towing through one contact</p>
+                        </div>
+                    </label>
+                    <label class="option" onclick="toggleMulti(this)">
+                        <input type="checkbox" name="features" value="mobile_service">
+                        <div class="option-check">?</div>
+                        <div class="option-content">
+                            <h4>?? Mobile Service</h4>
+                            <p>Mechanic comes to your location</p>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Q5: Services Wanted -->
+            <div class="survey-card">
+                <h2>5. What Services Would You Use?</h2>
+                <p>Select all services you'd likely need in the next 12 months.</p>
+                <div class="options" id="services-options">
+                    <label class="option" onclick="toggleMulti(this)">
+                        <input type="checkbox" name="services" value="diagnostics">
+                        <div class="option-check">?</div>
+                        <div class="option-content"><h4>?? Diagnostics (Engine lights, faults)</h4></div>
+                    </label>
+                    <label class="option" onclick="toggleMulti(this)">
+                        <input type="checkbox" name="services" value="oil_change">
+                        <div class="option-check">?</div>
+                        <div class="option-content"><h4>??? Oil Change / Service</h4></div>
+                    </label>
+                    <label class="option" onclick="toggleMulti(this)">
+                        <input type="checkbox" name="services" value="brakes">
+                        <div class="option-check">?</div>
+                        <div class="option-content"><h4>?? Brake Repairs</h4></div>
+                    </label>
+                    <label class="option" onclick="toggleMulti(this)">
+                        <input type="checkbox" name="services" value="nct">
+                        <div class="option-check">?</div>
+                        <div class="option-content"><h4>?? NCT Prep & Management</h4></div>
+                    </label>
+                    <label class="option" onclick="toggleMulti(this)">
+                        <input type="checkbox" name="services" value="tyres">
+                        <div class="option-check">?</div>
+                        <div class="option-content"><h4>?? Tyres</h4></div>
+                    </label>
+                    <label class="option" onclick="toggleMulti(this)">
+                        <input type="checkbox" name="services" value="battery">
+                        <div class="option-check">?</div>
+                        <div class="option-content"><h4>?? Battery Replacement / Jump Start</h4></div>
+                    </label>
+                    <label class="option" onclick="toggleMulti(this)">
+                        <input type="checkbox" name="services" value="welding">
+                        <div class="option-check">?</div>
+                        <div class="option-content"><h4>?? Welding / Exhaust</h4></div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Q6: Missing Features -->
+            <div class="survey-card">
+                <h2>6. What's Missing?</h2>
+                <p>Is there anything you'd want added to the website or services?</p>
+                <textarea name="missing_features" placeholder="Tell us what you'd like to see..."></textarea>
+            </div>
+
+            <!-- Q7: General Feedback -->
+            <div class="survey-card">
+                <h2>7. Any Other Feedback?</h2>
+                <p>Comments, suggestions, or things you particularly like or dislike?</p>
+                <textarea name="general_feedback" placeholder="Your thoughts..."></textarea>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="survey-card">
+                <h2>8. Your Details (Optional)</h2>
+                <p>Enter to win a FREE oil change and be first to hear about launch offers!</p>
+                <input type="text" name="name" placeholder="Your Name">
+                <input type="email" name="email" placeholder="Your Email">
+                <input type="text" name="phone" placeholder="Your Phone (for winner contact)">
+                <label style="display: flex; align-items: center; gap: 10px; color: var(--gray);">
+                    <input type="checkbox" name="subscribe" value="yes" checked>
+                    Keep me updated on Lavelle's Auto launch and offers
+                </label>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="submit-btn">?? Submit My Feedback</button>
+
+            <!-- Share Section -->
+            <div class="share-section">
+                <h3>?? Share With Your Network!</h3>
+                <p style="margin-bottom: 15px;">Help Ethan get more feedback by sharing this survey.</p>
+                <div class="share-btns">
+                    <a href="https://wa.me/?text=Help%20Ethan%20choose%20the%20name%20for%20his%20new%20garage%20on%20Achill!%20Take%202%20mins%20to%20vote%3A%20https%3A%2F%2Flavelles.exposuresolutions.me%2Ffeedback" class="share-btn share-wa">?? WhatsApp</a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://lavelles.exposuresolutions.me/feedback" class="share-btn share-fb">?? Facebook</a>
+                    <a href="mailto:?subject=Help%20choose%20a%20name%20for%20Ethan%27s%20garage&body=Take%202%20mins%20to%20vote%20on%20the%20name%20and%20services%3A%20https%3A%2F%2Flavelles.exposuresolutions.me%2Ffeedback" class="share-btn share-email">?? Email</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="footer">
+        <p>Survey by <a href="https://exposuresolutions.ie" target="_blank">Exposure Solutions</a> for Lavelle's Auto</p>
+        <p style="margin-top: 10px;">Questions? WhatsApp Ethan: <a href="https://wa.me/353851026371">+353 85 102 6371</a></p>
+    </div>
+
+    <script>
+        function selectOption(el, group) {
+            document.querySelectorAll(`#${group}-options .option`).forEach(opt => opt.classList.remove('selected'));
+            el.classList.add('selected');
+            el.querySelector('input').checked = true;
+        }
+
+        function toggleMulti(el) {
+            el.classList.toggle('selected');
+            const input = el.querySelector('input');
+            input.checked = !input.checked;
+        }
+
+        function selectRating(el, group) {
+            document.querySelectorAll(`#${group}-rating .rating-btn`).forEach(btn => btn.classList.remove('selected'));
+            el.classList.add('selected');
+            document.getElementById(`${group}_rating_input`).value = el.textContent;
+        }
+
+        function submitSurvey(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = new FormData(e.target);
+            const data = {};
+            formData.forEach((value, key) => {
+                if (data[key]) {
+                    if (Array.isArray(data[key])) {
+                        data[key].push(value);
+                    } else {
+                        data[key] = [data[key], value];
+                    }
+                } else {
+                    data[key] = value;
+                }
+            });
+
+            // In production, this would send to GHL webhook or API
+            console.log('Survey Data:', data);
+
+            // Show thank you message
+            document.querySelector('.container').innerHTML = `
+                <div class="header-card">
+                    <img src="https://storage.googleapis.com/msgsndr/KbiucErIMNPbO1mY4qXL/media/693c3256078883f5afa88cff.png" alt="Lavelle's Auto Logo" class="logo">
+                    <h1>?? Thank You!</h1>
+                    <p>Your feedback has been submitted. Ethan really appreciates you taking the time!</p>
+                    <div class="badge">You're entered to win a FREE oil change!</div>
+                    <div style="margin-top: 30px;">
+                        <a href="https://lavelles.exposuresolutions.me/home-703153" style="display: inline-block; padding: 15px 30px; background: var(--primary); color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">Visit the Website</a>
+                    </div>
+                </div>
+            `;
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
