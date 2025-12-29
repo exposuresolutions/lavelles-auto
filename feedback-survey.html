@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #005A9C;
@@ -26,11 +28,13 @@
             font-family: 'Roboto', sans-serif; 
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             min-height: 100vh;
-            padding: 20px;
+            /* Removed padding to fix "white border" issue */
+            margin: 0;
+            padding-bottom: 80px; /* Space for mobile floating icons */
         }
         h1,h2,h3 { font-family: 'Roboto Condensed', sans-serif; }
         
-        .container { max-width: 800px; margin: 0 auto; }
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
         
         /* Header Card */
         .header-card {
@@ -40,8 +44,10 @@
             text-align: center;
             margin-bottom: 30px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
         }
-        .logo { width: 120px; margin: 0 auto 20px; }
+        .logo { width: 240px; margin: 0 auto 20px; }
         .header-card h1 { color: var(--primary); font-size: 2rem; margin-bottom: 10px; }
         .header-card p { color: var(--gray); font-size: 1.1rem; }
         .badge { display: inline-block; background: var(--accent); color: var(--dark); padding: 8px 20px; border-radius: 30px; font-weight: bold; margin-top: 15px; }
@@ -102,15 +108,15 @@
         textarea { min-height: 100px; resize: vertical; }
         
         /* Rating */
-        .rating { display: flex; gap: 10px; margin-bottom: 20px; }
+        .rating { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
         .rating-btn {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border: 2px solid #eee;
             border-radius: var(--radius);
             background: white;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: bold;
             transition: all 0.3s;
         }
@@ -156,15 +162,67 @@
             font-weight: bold;
             color: white;
             transition: transform 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         .share-btn:hover { transform: scale(1.05); }
         .share-wa { background: #25D366; }
         .share-fb { background: #1877F2; }
-        .share-tw { background: #1DA1F2; }
+        .share-snap { background: #FFFC00; color: black; text-shadow: none; }
+        .share-tg { background: #0088cc; }
         .share-email { background: var(--gray); }
+
+        /* Floating Social Icons */
+        .floating-socials {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000;
+        }
+        .float-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .float-icon:hover { transform: scale(1.2); }
+        .float-wa { background: #25D366; }
+        .float-snap { background: #FFFC00; color: black; }
+        .float-tg { background: #0088cc; }
+        .float-fb { background: #1877F2; }
+
+        @media (max-width: 768px) {
+            .floating-socials {
+                bottom: 20px;
+                top: auto;
+                right: 50%;
+                transform: translateX(50%);
+                flex-direction: row;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Floating Socials -->
+    <div class="floating-socials">
+        <a href="https://wa.me/353851026371" class="float-icon float-wa" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="float-icon float-snap" title="Snapchat"><i class="fab fa-snapchat-ghost"></i></a>
+        <a href="#" class="float-icon float-tg" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+        <a href="#" class="float-icon float-fb" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+    </div>
+
     <div class="container">
         <!-- Header -->
         <div class="header-card">
@@ -405,23 +463,56 @@
                 </div>
             </div>
 
-            <!-- Q7: Missing Features -->
+            <!-- Q7: Ethan's Philosophy (Upgrade) -->
+            <div class="survey-card" style="border-top: 4px solid var(--accent);">
+                <h2>7. Ethan's Philosophy: Upgrade vs. Repair</h2>
+                <p><strong>The roads in the West (and Achill especially) are tough on cars.</strong> Instead of constantly repairing shocks and joints, Ethan suggests upgrading your suspension and tyres to handle the terrain. Save money in the long run and enjoy the ride.</p>
+                <p>Would you be interested in an <strong>"Achill Road Ready"</strong> upgrade package?</p>
+                <div class="options" id="upgrade-options">
+                    <label class="option" onclick="selectOption(this, 'upgrade')">
+                        <input type="radio" name="upgrade_interest" value="yes">
+                        <div class="option-check">?</div>
+                        <div class="option-content">
+                            <h4>Yes, definitely</h4>
+                            <p>I want my car to handle the roads better.</p>
+                        </div>
+                    </label>
+                    <label class="option" onclick="selectOption(this, 'upgrade')">
+                        <input type="radio" name="upgrade_interest" value="maybe">
+                        <div class="option-check">?</div>
+                        <div class="option-content">
+                            <h4>Maybe / Tell me more</h4>
+                            <p>Depends on the price and benefits.</p>
+                        </div>
+                    </label>
+                    <label class="option" onclick="selectOption(this, 'upgrade')">
+                        <input type="radio" name="upgrade_interest" value="no">
+                        <div class="option-check">?</div>
+                        <div class="option-content">
+                            <h4>No, just standard repairs</h4>
+                            <p>I prefer to fix things only when they break.</p>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Q8: Missing Features -->
             <div class="survey-card">
-                <h2>7. What's Missing?</h2>
+                <h2>8. What's Missing?</h2>
                 <p>Is there anything you'd want added to the website or services?</p>
                 <textarea name="missing_features" placeholder="Tell us what you'd like to see..."></textarea>
             </div>
 
-            <!-- Q8: General Feedback -->
+            <!-- Q9: General Feedback -->
             <div class="survey-card">
-                <h2>8. Any Other Feedback?</h2>
+                <h2>9. Any Other Feedback?</h2>
                 <p>Comments, suggestions, or things you particularly like or dislike?</p>
                 <textarea name="general_feedback" placeholder="Your thoughts..."></textarea>
             </div>
 
             <!-- Contact Info -->
             <div class="survey-card">
-                <h2>9. Your Details (Optional)</h2>
+                <h2>10. Your Details (Optional)</h2>
                 <p>Enter to win a FREE oil change and be first to hear about launch offers!</p>
                 <input type="text" name="name" placeholder="Your Name">
                 <input type="email" name="email" placeholder="Your Email">
@@ -440,9 +531,11 @@
                 <h3>?? Share With Your Network!</h3>
                 <p style="margin-bottom: 15px;">Help Ethan get more feedback by sharing this survey.</p>
                 <div class="share-btns">
-                    <a href="https://wa.me/?text=Help%20Ethan%20choose%20the%20name%20for%20his%20new%20garage%20on%20Achill!%20Take%202%20mins%20to%20vote%3A%20https%3A%2F%2Flavelles.exposuresolutions.me%2Ffeedback" class="share-btn share-wa">?? WhatsApp</a>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://lavelles.exposuresolutions.me/feedback" class="share-btn share-fb">?? Facebook</a>
-                    <a href="mailto:?subject=Help%20choose%20a%20name%20for%20Ethan%27s%20garage&body=Take%202%20mins%20to%20vote%20on%20the%20name%20and%20services%3A%20https%3A%2F%2Flavelles.exposuresolutions.me%2Ffeedback" class="share-btn share-email">?? Email</a>
+                    <a href="https://wa.me/?text=Help%20Ethan%20choose%20the%20name%20for%20his%20new%20garage%20on%20Achill!%20Take%202%20mins%20to%20vote%3A%20https%3A%2F%2Flavelles.exposuresolutions.me%2Ffeedback" class="share-btn share-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    <a href="https://www.snapchat.com/scan?attachmentUrl=https%3A%2F%2Flavelles.exposuresolutions.me%2Ffeedback" class="share-btn share-snap"><i class="fab fa-snapchat-ghost"></i> Snapchat</a>
+                    <a href="https://t.me/share/url?url=https%3A%2F%2Flavelles.exposuresolutions.me%2Ffeedback&text=Help%20Ethan%20choose%20the%20name%20for%20his%20new%20garage!" class="share-btn share-tg"><i class="fab fa-telegram-plane"></i> Telegram</a>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=https://lavelles.exposuresolutions.me/feedback" class="share-btn share-fb"><i class="fab fa-facebook-f"></i> Facebook</a>
+                    <a href="mailto:?subject=Help%20choose%20a%20name%20for%20Ethan%27s%20garage&body=Take%202%20mins%20to%20vote%20on%20the%20name%20and%20services%3A%20https%3A%2F%2Flavelles.exposuresolutions.me%2Ffeedback" class="share-btn share-email"><i class="fas fa-envelope"></i> Email</a>
                 </div>
             </div>
         </form>
@@ -472,8 +565,12 @@
             document.getElementById(`${group}_rating_input`).value = el.textContent;
         }
 
-        function submitSurvey(e) {
+        async function submitSurvey(e) {
             e.preventDefault();
+            const btn = e.target.querySelector('.submit-btn');
+            const originalText = btn.innerText;
+            btn.innerText = '?? Sending...';
+            btn.disabled = true;
             
             // Collect form data
             const formData = new FormData(e.target);
@@ -492,6 +589,9 @@
 
             // In production, this would send to GHL webhook or API
             console.log('Survey Data:', data);
+            
+            // Simulate network request
+            await new Promise(r => setTimeout(r, 1000));
 
             // Show thank you message
             document.querySelector('.container').innerHTML = `
