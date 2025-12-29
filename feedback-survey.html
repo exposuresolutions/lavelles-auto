@@ -19,7 +19,7 @@
             --dark: #1a1a1a;
             --light: #f4f4f4;
             --white: #ffffff;
-            --gray: #666;
+            --gray: #444; /* Darkened for better readability */
             --green: #28a745;
             --radius: 8px;
         }
@@ -28,11 +28,15 @@
             font-family: 'Roboto', sans-serif; 
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             min-height: 100vh;
-            /* Removed padding to fix "white border" issue */
             margin: 0;
-            padding-bottom: 80px; /* Space for mobile floating icons */
+            padding-bottom: 80px; 
+            color: var(--dark);
         }
-        h1,h2,h3 { font-family: 'Roboto Condensed', sans-serif; }
+        h1,h2,h3 { 
+            font-family: 'Roboto Condensed', sans-serif; 
+            text-transform: uppercase; /* Match brand style */
+            letter-spacing: 0.5px;
+        }
         
         .container { max-width: 800px; margin: 0 auto; padding: 20px; }
         
@@ -61,7 +65,7 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
         .survey-card h2 { color: var(--primary); font-size: 1.4rem; margin-bottom: 20px; border-bottom: 3px solid var(--accent); padding-bottom: 10px; display: inline-block; }
-        .survey-card p { color: var(--gray); margin-bottom: 20px; }
+        .survey-card p { color: var(--gray); margin-bottom: 20px; line-height: 1.6; }
         
         /* Options */
         .options { display: grid; gap: 15px; }
@@ -235,8 +239,8 @@
         <form id="surveyForm" onsubmit="submitSurvey(event)">
             <!-- Q1: Business Name -->
             <div class="survey-card">
-                <h2>1. The Name Game</h2>
-                <p>A name isn't just a label; it's a feeling. Which of these makes you trust us with your car?</p>
+                <h2>1. Choose Our Name</h2>
+                <p>A name isn't just a label; it's a promise. Which of these names makes you trust us with your car?</p>
                 <div class="options" id="name-options">
                     <label class="option" onclick="selectOption(this, 'name')">
                         <input type="radio" name="business_name" value="Lavelle's Auto">
@@ -275,8 +279,8 @@
 
             <!-- Q2: Domain -->
             <div class="survey-card">
-                <h2>2. The Web Address</h2>
-                <p>If you were typing it in, which is easiest?</p>
+                <h2>2. Best Web Address</h2>
+                <p>If you were typing our website into your phone, which one is easiest?</p>
                 <div class="options" id="domain-options">
                     <label class="option" onclick="selectOption(this, 'domain')">
                         <input type="radio" name="domain" value="lavellesauto.ie">
@@ -307,8 +311,8 @@
 
             <!-- Q3: Pain Points (Strategic) -->
             <div class="survey-card">
-                <h2>3. The "Magic Wand" Question</h2>
-                <p>Think about your last few experiences with mechanics (anywhere). If you could wave a magic wand and fix ONE annoying thing, what would it be?</p>
+                <h2>3. What Frustrates You Most?</h2>
+                <p>Think about your last few experiences with mechanics. If you could wave a magic wand and fix ONE annoying thing, what would it be?</p>
                 <div class="options" id="pain-options">
                     <label class="option" onclick="selectOption(this, 'pain')">
                         <input type="radio" name="pain_point" value="communication">
@@ -347,8 +351,8 @@
 
             <!-- Q4: Website Rating -->
             <div class="survey-card">
-                <h2>4. First Impressions</h2>
-                <p>We built this demo site to show what's possible. How does it feel?</p>
+                <h2>4. Rate Our New Website</h2>
+                <p>We built this demo site to show what's possible. How does it feel to you?</p>
                 <div class="rating" id="design-rating">
                     <button type="button" class="rating-btn" onclick="selectRating(this, 'design')">1</button>
                     <button type="button" class="rating-btn" onclick="selectRating(this, 'design')">2</button>
@@ -366,8 +370,8 @@
 
             <!-- Q5: Favorite Feature -->
             <div class="survey-card">
-                <h2>5. What Do You Like Most?</h2>
-                <p>Select all that appeal to you.</p>
+                <h2>5. Most Important Features?</h2>
+                <p>Which of these would make your life easier? Select all that apply.</p>
                 <div class="options" id="features-options">
                     <label class="option" onclick="toggleMulti(this)">
                         <input type="checkbox" name="features" value="online_booking">
@@ -422,8 +426,8 @@
 
             <!-- Q6: Services Wanted -->
             <div class="survey-card">
-                <h2>6. What Services Would You Use?</h2>
-                <p>Select all services you'd likely need in the next 12 months.</p>
+                <h2>6. Which Services Do You Need?</h2>
+                <p>Select all services you'd likely use in the next 12 months.</p>
                 <div class="options" id="services-options">
                     <label class="option" onclick="toggleMulti(this)">
                         <input type="checkbox" name="services" value="diagnostics">
@@ -465,7 +469,7 @@
 
             <!-- Q7: Ethan's Philosophy (Upgrade) -->
             <div class="survey-card" style="border-top: 4px solid var(--accent);">
-                <h2>7. Ethan's Philosophy: Upgrade vs. Repair</h2>
+                <h2>7. Suspension Upgrades: Interested?</h2>
                 <p><strong>The roads in the West (and Achill especially) are tough on cars.</strong> Instead of constantly repairing shocks and joints, Ethan suggests upgrading your suspension and tyres to handle the terrain. Save money in the long run and enjoy the ride.</p>
                 <p>Would you be interested in an <strong>"Achill Road Ready"</strong> upgrade package?</p>
                 <div class="options" id="upgrade-options">
@@ -548,15 +552,26 @@
 
     <script>
         function selectOption(el, group) {
+            // Update visual selection
             document.querySelectorAll(`#${group}-options .option`).forEach(opt => opt.classList.remove('selected'));
             el.classList.add('selected');
-            el.querySelector('input').checked = true;
+            
+            // Ensure input is checked (redundant for click but safe for programmatic)
+            const input = el.querySelector('input');
+            input.checked = true;
         }
 
         function toggleMulti(el) {
-            el.classList.toggle('selected');
             const input = el.querySelector('input');
-            input.checked = !input.checked;
+            // We use a small timeout to allow the browser's default click behavior to process the input state change
+            // This prevents the "double toggle" issue where manual JS undoes the browser's work
+            setTimeout(() => {
+                if (input.checked) {
+                    el.classList.add('selected');
+                } else {
+                    el.classList.remove('selected');
+                }
+            }, 0);
         }
 
         function selectRating(el, group) {
