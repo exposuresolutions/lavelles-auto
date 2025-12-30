@@ -54,16 +54,66 @@
 
 ## 5. EE Process Report (Ethan's Everything)
 **Project:** Lavelle's Auto
-**Status:** Ready for Client Review
+**Status:** Draft Deployment Achieved (Survey Live)
 **Completed Actions:**
 *   ? Full Website Build (Home, Services, Booking, Parts, Partners).
 *   ? Branding: "Third Generation Mechanics" theme.
 *   ? Strategic Roadmap: Business plan, growth stages, grant funding.
-*   ? Feedback Loop: Interactive survey created.
+*   ? Feedback Loop: Interactive survey created & deployed.
 *   ? Tech Stack: HTML/CSS (VS Code) -> GHL (Hosting).
+*   ? Workflow: Webhook -> Wait (1 min) -> Create Contact -> Email Notification.
 
 **Next Steps:**
-1.  Send WhatsApp to Ethan.
-2.  Get Survey Data.
-3.  Finalize Domain.
+1.  Send WhatsApp to Ethan with Survey Link.
+2.  Monitor Survey Data.
+3.  Finalize Domain based on votes.
 4.  Launch Payment/Booking integrations.
+
+## 6. Communication Drafts (WhatsApp)
+
+**To Ethan (Client):**
+> Ethan, big progress. The site draft is live. ??
+>
+> 1. **Main Site Draft:** https://lavelles.exposuresolutions.me/
+> 2. **Strategic Roadmap:** https://lavelles.exposuresolutions.me/strategy
+> 
+> Before we finalize the domain and branding, I need your vote on the options.
+> **Vote Here:** https://lavelles.exposuresolutions.me/feedback
+> 
+> Fill it out so I can lock in the next steps. Talk soon.
+
+**To Contacts (Testing/Feedback):**
+> Hey guys, quick favor. I'm launching a new site for a mechanic on Achill and need to stress-test the feedback form. ??
+>
+> Could you take 30 seconds to fill this out? You can put in fake info or real feedback on the design.
+> Link: https://lavelles.exposuresolutions.me/feedback
+>
+> Thanks!
+
+## 7. Final EE Process Report (Ethan's Everything)
+**Date:** 2025-12-29
+**Status:** LIVE (Draft Deployment)
+
+**Review of Deliverables:**
+1.  **Full Website:**
+    *   **Status:** Complete & Hosted.
+    *   **URL:** `https://lavelles.exposuresolutions.me/`
+    *   **Notes:** Includes Home, Services, Booking, Parts, Partners pages. Mobile responsive.
+
+2.  **Feedback Loop (Survey):**
+    *   **Status:** Active & Integrated.
+    *   **URL:** `https://lavelles.exposuresolutions.me/feedback`
+    *   **Automation:** Webhook -> GHL -> Email Notification (with data formatting fixes).
+    *   **UX:** "?? Sending..." fixed to spinner icon.
+
+3.  **Strategic Roadmap:**
+    *   **Status:** Published.
+    *   **URL:** `https://lavelles.exposuresolutions.me/strategy`
+    *   **Purpose:** Shows client the long-term vision (Apps, AI, Grants).
+
+4.  **Portfolio Integration:**
+    *   **Status:** Updated.
+    *   **Location:** Exposure Solutions Main Site.
+    *   **Action:** Link updated to new subdomain.
+
+**Ready for Client Handover.**

@@ -31,6 +31,8 @@
             margin: 0;
             padding-bottom: 80px; 
             color: var(--dark);
+            /* FIX: Ensure background covers full scroll height on mobile */
+            background-attachment: fixed; 
         }
         h1,h2,h3 { 
             font-family: 'Roboto Condensed', sans-serif; 
@@ -51,7 +53,7 @@
             position: relative;
             overflow: hidden;
         }
-        .logo { width: 240px; margin: 0 auto 20px; }
+        .logo { width: 240px; max-width: 100%; margin: 0 auto 20px; } /* FIX: Added max-width */
         .header-card h1 { color: var(--primary); font-size: 2rem; margin-bottom: 10px; }
         .header-card p { color: var(--gray); font-size: 1.1rem; }
         .badge { display: inline-block; background: var(--accent); color: var(--dark); padding: 8px 20px; border-radius: 30px; font-weight: bold; margin-top: 15px; }
@@ -91,10 +93,19 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            background: white; /* Ensure background is white when unselected */
+        }
+        .option-check i {
+            opacity: 0;
+            transition: opacity 0.2s;
+            font-size: 14px;
         }
         .option.selected .option-check { background: var(--green); border-color: var(--green); color: white; }
+        .option.selected .option-check i { opacity: 1; }
+        
         .option-content { flex: 1; }
-        .option-content h4 { color: var(--dark); margin-bottom: 5px; }
+        .option-content h4 { color: var(--dark); margin-bottom: 5px; display: flex; align-items: center; gap: 10px; }
+        .option-content h4 i { color: var(--primary); width: 20px; text-align: center; }
         .option-content p { color: var(--gray); font-size: 0.9rem; margin: 0; }
         
         /* Text Areas */
@@ -215,6 +226,14 @@
                 transform: translateX(50%);
                 flex-direction: row;
             }
+            
+            /* FIX: Mobile Responsiveness Adjustments */
+            .container { padding: 15px; }
+            .header-card { padding: 25px 15px; } /* Reduce padding */
+            .survey-card { padding: 20px 15px; } /* Reduce padding */
+            .header-card h1 { font-size: 1.5rem; }
+            .option { padding: 15px; } /* Compact options */
+            .option-content h4 { font-size: 1rem; }
         }
     </style>
 </head>
@@ -233,7 +252,7 @@
             <img src="https://storage.googleapis.com/msgsndr/KbiucErIMNPbO1mY4qXL/media/693c3256078883f5afa88cff.png" alt="Lavelle's Auto Logo" class="logo">
             <h1>Help Shape the Future of Lavelle's Auto</h1>
             <p>Ethan is launching his new garage on Achill Island and wants YOUR input on the final name, branding, and services.</p>
-            <div class="badge">?? Complete for a chance to win a FREE oil change!</div>
+            <div class="badge"><i class="fas fa-trophy"></i> Complete for a chance to win a FREE oil change!</div>
         </div>
 
         <form id="surveyForm" onsubmit="submitSurvey(event)">
@@ -377,7 +396,7 @@
                         <input type="checkbox" name="features" value="online_booking">
                         <div class="option-check"><i class="fas fa-check"></i></div>
                         <div class="option-content">
-                            <h4><i class="fas fa-calendar-check"></i> Online Booking</h4>
+                            <h4><i class="fas fa-calendar-alt"></i> Online Booking</h4>
                             <p>Book appointments 24/7 without calling</p>
                         </div>
                     </label>
@@ -385,7 +404,7 @@
                         <input type="checkbox" name="features" value="loyalty_program">
                         <div class="option-check"><i class="fas fa-check"></i></div>
                         <div class="option-content">
-                            <h4><i class="fas fa-trophy"></i> Loyalty Points Program</h4>
+                            <h4><i class="fas fa-star"></i> Loyalty Points Program</h4>
                             <p>Earn points for services, referrals, and reviews</p>
                         </div>
                     </label>
@@ -417,7 +436,7 @@
                         <input type="checkbox" name="features" value="mobile_service">
                         <div class="option-check"><i class="fas fa-check"></i></div>
                         <div class="option-content">
-                            <h4><i class="fas fa-car-side"></i> Mobile Service</h4>
+                            <h4><i class="fas fa-truck"></i> Mobile Service</h4>
                             <p>Mechanic comes to your location</p>
                         </div>
                     </label>
@@ -432,7 +451,7 @@
                     <label class="option" onclick="toggleMulti(this)">
                         <input type="checkbox" name="services" value="diagnostics">
                         <div class="option-check"><i class="fas fa-check"></i></div>
-                        <div class="option-content"><h4><i class="fas fa-laptop-medical"></i> Diagnostics (Engine lights, faults)</h4></div>
+                        <div class="option-content"><h4><i class="fas fa-car-battery"></i> Diagnostics (Engine lights, faults)</h4></div>
                     </label>
                     <label class="option" onclick="toggleMulti(this)">
                         <input type="checkbox" name="services" value="oil_change">
@@ -442,7 +461,7 @@
                     <label class="option" onclick="toggleMulti(this)">
                         <input type="checkbox" name="services" value="brakes">
                         <div class="option-check"><i class="fas fa-check"></i></div>
-                        <div class="option-content"><h4><i class="fas fa-circle-stop"></i> Brake Repairs</h4></div>
+                        <div class="option-content"><h4><i class="fas fa-car"></i> Brake Repairs</h4></div>
                     </label>
                     <label class="option" onclick="toggleMulti(this)">
                         <input type="checkbox" name="services" value="nct">
@@ -452,17 +471,17 @@
                     <label class="option" onclick="toggleMulti(this)">
                         <input type="checkbox" name="services" value="tyres">
                         <div class="option-check"><i class="fas fa-check"></i></div>
-                        <div class="option-content"><h4><i class="fas fa-life-ring"></i> Tyres</h4></div>
+                        <div class="option-content"><h4><i class="fas fa-dot-circle"></i> Tyres</h4></div>
                     </label>
                     <label class="option" onclick="toggleMulti(this)">
                         <input type="checkbox" name="services" value="battery">
                         <div class="option-check"><i class="fas fa-check"></i></div>
-                        <div class="option-content"><h4><i class="fas fa-car-battery"></i> Battery Replacement / Jump Start</h4></div>
+                        <div class="option-content"><h4><i class="fas fa-battery-full"></i> Battery Replacement / Jump Start</h4></div>
                     </label>
                     <label class="option" onclick="toggleMulti(this)">
                         <input type="checkbox" name="services" value="welding">
                         <div class="option-check"><i class="fas fa-check"></i></div>
-                        <div class="option-content"><h4><i class="fas fa-fire"></i> Welding / Exhaust</h4></div>
+                        <div class="option-content"><h4><i class="fas fa-fire-extinguisher"></i> Welding / Exhaust</h4></div>
                     </label>
                 </div>
             </div>
@@ -528,11 +547,11 @@
             </div>
 
             <!-- Submit -->
-            <button type="submit" class="submit-btn">?? Submit My Feedback</button>
+            <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Submit My Feedback</button>
 
             <!-- Share Section -->
             <div class="share-section">
-                <h3>?? Share With Your Network!</h3>
+                <h3><i class="fas fa-share-alt"></i> Share With Your Network!</h3>
                 <p style="margin-bottom: 15px;">Help Ethan get more feedback by sharing this survey.</p>
                 <div class="share-btns">
                     <a href="https://wa.me/?text=Help%20Ethan%20choose%20the%20name%20for%20his%20new%20garage%20on%20Achill!%20Take%202%20mins%20to%20vote%3A%20https%3A%2F%2Flavelles.exposuresolutions.me%2Ffeedback" class="share-btn share-wa"><i class="fab fa-whatsapp"></i> WhatsApp</a>
@@ -584,7 +603,7 @@
             e.preventDefault();
             const btn = e.target.querySelector('.submit-btn');
             const originalText = btn.innerText;
-            btn.innerText = '?? Sending...';
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             btn.disabled = true;
             
             // Collect form data
@@ -602,13 +621,53 @@
                 }
             });
 
+            // FIX 1: Convert arrays to strings for GHL compatibility (fixes blank checkboxes)
+            Object.keys(data).forEach(key => {
+                if (Array.isArray(data[key])) {
+                    data[key] = data[key].join(', ');
+                }
+            });
+
+            // FIX 2: Ensure all fields have a value (fixes blank lines)
+            const expectedKeys = [
+                'business_name', 'domain', 'pain_point', 'design_rating', 
+                'upgrade_interest', 'features', 'services', 
+                'missing_features', 'general_feedback',
+                'name', 'email', 'phone'
+            ];
+            
+            expectedKeys.forEach(key => {
+                if (!data[key]) data[key] = 'Not Answered';
+            });
+
+            // NEW: Create a single summary field for easier GHL mapping
+            data['survey_summary'] = `
+SURVEY SUBMISSION:
+------------------
+Name: ${data.name}
+Email: ${data.email}
+Phone: ${data.phone}
+
+1. Chosen Name: ${data.business_name}
+2. Chosen Domain: ${data.domain}
+3. Frustration: ${data.pain_point}
+4. Rating: ${data.design_rating}/10
+5. Upgrade Interest: ${data.upgrade_interest}
+
+Features: ${data.features}
+Services: ${data.services}
+
+Missing: ${data.missing_features}
+Feedback: ${data.general_feedback}
+            `.trim();
+
             // In production, this would send to GHL webhook or API
             console.log('Survey Data:', data);
             
             // ==========================================
-            // ?? STEP 1: PASTE YOUR GHL WEBHOOK URL HERE
+            // STEP 1: PASTE YOUR GHL WEBHOOK URL HERE
             // ==========================================
-            const WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/KbiucErIMNPbO1mY4qXL/webhook-trigger/d44cb8c9-230d-4f73-a2f7-124f5937b172';
+            const WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/KbiucErIMNPbO1mY4qXL/webhook-trigger/297f0e76-a8cd-401c-9230-433c3d44e8f7';
             
             if (WEBHOOK_URL) {
                 try {
@@ -617,12 +676,12 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(data)
                     });
-                    console.log('? Data sent to GHL Webhook');
+                    console.log('Data sent to GHL Webhook');
                 } catch (err) {
-                    console.error('? Failed to send to GHL:', err);
+                    console.error('Failed to send to GHL:', err);
                 }
             } else {
-                console.warn('?? No Webhook URL set. Data was NOT sent to GHL. (Check console for data)');
+                console.warn('No Webhook URL set. Data was NOT sent to GHL. (Check console for data)');
             }
 
             // Simulate network request (remove this if you want it to be instant)
@@ -632,9 +691,9 @@
             document.querySelector('.container').innerHTML = `
                 <div class="header-card">
                     <img src="https://storage.googleapis.com/msgsndr/KbiucErIMNPbO1mY4qXL/media/693c3256078883f5afa88cff.png" alt="Lavelle's Auto Logo" class="logo">
-                    <h1>?? Thank You!</h1>
+                    <h1><i class="fas fa-check-circle"></i> Thank You!</h1>
                     <p>Your feedback has been submitted. Ethan really appreciates you taking the time!</p>
-                    <div class="badge">You're entered to win a FREE oil change!</div>
+                    <div class="badge"><i class="fas fa-trophy"></i> You're entered to win a FREE oil change!</div>
                     <div style="margin-top: 30px;">
                         <a href="https://lavelles.exposuresolutions.me/home-703153" style="display: inline-block; padding: 15px 30px; background: var(--primary); color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">Visit the Website</a>
                     </div>

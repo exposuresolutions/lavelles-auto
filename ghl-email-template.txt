@@ -1,0 +1,34 @@
+Subject: New Survey: {{trigger.body.name}}
+
+New Lavelle's Auto Survey Submission:
+
+---
+
+**Contact Details:**
+- Name: {{trigger.body.name}}
+- Email: {{trigger.body.email}}
+- Phone: {{trigger.body.phone}}
+
+---
+
+**Survey Answers:**
+
+1.  **Chosen Name:** {{trigger.body.business_name}}
+2.  **Chosen Domain:** {{trigger.body.domain}}
+3.  **Biggest Frustration:** {{trigger.body.pain_point}}
+4.  **Website Rating (1-10):** {{trigger.body.design_rating}}
+5.  **"Achill Ready" Upgrade?:** {{trigger.body.upgrade_interest}}
+
+**Important Features (Checkboxes):**
+{{trigger.body.features}}
+
+**Services Needed (Checkboxes):**
+{{trigger.body.services}}
+
+**What's Missing?:**
+{{trigger.body.missing_features}}
+
+**General Feedback:**
+{{trigger.body.general_feedback}}
+
+---

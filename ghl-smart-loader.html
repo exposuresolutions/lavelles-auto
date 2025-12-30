@@ -1,0 +1,77 @@
+<!-- 
+    COPY THIS ENTIRE BLOCK INTO YOUR GHL CUSTOM CODE ELEMENT 
+    This script fetches the latest code from GitHub, strips the <html>/<body> tags,
+    and injects the content + styles + scripts into the page safely.
+-->
+
+<div id="dynamic-content">
+    <div style="text-align:center; padding: 100px 20px;">
+        <h2 style="font-family: sans-serif; color: #666;">Loading...</h2>
+        <div style="margin-top: 20px; border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; width: 40px; height: 40px; animation: spin 2s linear infinite; margin: 0 auto;"></div>
+    </div>
+    <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
+</div>
+
+<script>
+    (function() {
+        // ==========================================
+        // CONFIGURATION
+        // ==========================================
+        // Change this URL to the file you want to load (Feedback, Strategy, or Loyalty)
+        // We are using the RAW GitHub URL to avoid needing to set up GitHub Pages
+        // CORRECTED URL: Removed the local folder path since this file is at the root of the repo
+        const GITHUB_FILE_URL = 'https://raw.githubusercontent.com/exposuresolutions/lavelles-auto/master/feedback-survey.html';
+        // ==========================================
+
+        console.log('?? Starting Smart Fetch from:', GITHUB_FILE_URL);
+
+        fetch(GITHUB_FILE_URL)
+            .then(response => {
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                return response.text();
+            })
+            .then(html => {
+                console.log('? Content fetched. Parsing...');
+                
+                // 1. Parse the HTML string into a DOM object
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+
+                // 2. Inject Styles (<style> and <link rel="stylesheet">)
+                const styles = doc.querySelectorAll('style, link[rel="stylesheet"]');
+                styles.forEach(styleNode => {
+                    document.head.appendChild(styleNode.cloneNode(true));
+                });
+
+                // 3. Inject Body Content
+                const contentDiv = document.getElementById('dynamic-content');
+                contentDiv.innerHTML = doc.body.innerHTML;
+
+                // 4. Execute Scripts (innerHTML does not execute scripts automatically)
+                const scripts = doc.querySelectorAll('script');
+                scripts.forEach(oldScript => {
+                    const newScript = document.createElement('script');
+                    // Copy attributes (src, type, etc.)
+                    Array.from(oldScript.attributes).forEach(attr => {
+                        newScript.setAttribute(attr.name, attr.value);
+                    });
+                    // Copy content
+                    newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                    // Append to body to execute
+                    document.body.appendChild(newScript);
+                });
+
+                console.log('? Page injected successfully.');
+            })
+            .catch(err => {
+                console.error('? Failed to load content:', err);
+                document.getElementById('dynamic-content').innerHTML = `
+                    <div style="text-align:center; padding:50px; color: red;">
+                        <h3>?? Error loading content</h3>
+                        <p>${err.message}</p>
+                        <p>Check the console (F12) for details.</p>
+                    </div>
+                `;
+            });
+    })();
+</script>
